@@ -7,6 +7,10 @@ body {
     width: 100%;
 }
 
+#controls {
+    width: 70%;
+}
+
 .heading h1 {
     display: inline;
 }
@@ -17,8 +21,14 @@ body {
     font-size: 15px;
 }
 
-#play_game {
+#play_game,
+#restart {
     padding: 10px;
     font-size: 20px;
 }
-                                                                             
+
+#copyright_footer {
+    bottom: 0%;
+    width: 100%;
+    background-color: burlywood;
+}
