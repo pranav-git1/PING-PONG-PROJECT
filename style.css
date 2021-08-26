@@ -31,4 +31,7 @@ body {
     bottom: 0%;
     width: 100%;
     background-color: burlywood;
+    text-align: center;
+    padding: 10px;
+    font-size: 18px;
 }
