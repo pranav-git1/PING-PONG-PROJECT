@@ -26,6 +26,11 @@ var ball = {
     dy: 3
 }
 
+function preload() {
+    touched = loadSound("ball_touch_paddel.wav");
+    missed = loadSound("missed.wav");
+}
+
 function setup() {
     var canvas = createCanvas(700, 600);
     canvas.parent('canvas');
@@ -38,6 +43,12 @@ function setup() {
 
 function modelLoaded() {
     console.log("model loaded");
+}
+
+function restart() {
+    pcscore = 0;
+    playerscore = 0;
+    loop();
 }
 
 function gotPoses(results) {
@@ -81,7 +92,7 @@ function draw() {
         fill(250, 0, 0);
         stroke(0, 0, 250);
         strokeWeight(0.5);
-        paddle1Y = mouseY;
+        paddle1Y = wristY;
         rect(paddle1X, paddle1Y, paddle1, paddle1Height, 100);
 
 
@@ -154,11 +165,13 @@ function move() {
     }
     if (ball.x - 2.5 * ball.r / 2 < 0) {
         if (ball.y >= paddle1Y && ball.y <= paddle1Y + paddle1Height) {
+            touched.play();
             ball.dx = -ball.dx + 0.5;
         } else {
             pcscore++;
             reset();
             navigator.vibrate(100);
+            missed.play();
         }
     }
     if (pcscore == 4) {
@@ -169,7 +182,7 @@ function move() {
         stroke("white");
         textSize(25)
         text("Game Over!☹☹", width / 2, height / 2);
-        text("Reload The Page!", width / 2, height / 2 + 30)
+        text("Press Restart to restart the game", width / 2, height / 2 + 30)
         noLoop();
         pcscore = 0;
     }
